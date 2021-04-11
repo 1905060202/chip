@@ -20,6 +20,6 @@ if __name__ == "__main__" :
     filename = word + '.json'#如果不执行这步操作，那么文件在d盘根目录生成
     fp = open(filename,'w',encoding='utf-8')
     json.dump(mybaby,fp=fp,ensure_ascii=False)#获取的信息是中文，故不能同ascii码
-    fp.close()
+    fp.close()#如果没有close，那么数据就不会保存下来
     print('数据爬取结束')
     #如果json出了问题，记得检查一下url
