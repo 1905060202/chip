@@ -29,16 +29,16 @@ if __name__ == '__main__' :
     json_ids = re.post(url=url,headers=headers,data=data).json()
     id_list = []#专门来存储企业id
     all_data_list = []#存储所有企业信息
-    for dic in json_ids['list'] :
-        id_list.append(dic['ID'])
+    for dic in json_ids['list'] :#选择字典中的list列表，并遍历列表
+        id_list.append(dic['ID'])#选择列表中的id值并添加到新列表中
     #获取企业详情信息
     get_url = 'http://scxk.nmpa.gov.cn:81/xk/itownet/portalAction.do?method=getXkzsById'
-    for id in id_list :
+    for id in id_list :#选择列表并遍历列表
         data = {
             'id' : id
-         }
-        detail_json = re.post(url=get_url,headers=headers,data=data).json()
-        all_data_list.append(detail_json)
+         }#遍历时，传送不同的id值
+        detail_json = re.post(url=get_url,headers=headers,data=data).json()#返回一个被解析为json格式的Promise 对象
+        all_data_list.append(detail_json)#将json添加到新列表中去
     #持久化存储
     with open('./all_data.json','w',encoding='utf-8') as fp:
         json.dump(all_data_list,fp=fp,ensure_ascii=False)
